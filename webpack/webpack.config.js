@@ -1,9 +1,13 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const package = require('../package.json');
 
 module.exports = {
-  entry: "./src/scripts/app.js", //path relative to this file
+  entry: {
+    app: "./src/scripts/app.js",
+    vendor: Object.keys(package.dependencies)
+  },
   output: {
-    filename: "./dist/app.bundle.js" //path relative to this file
+    filename: "./dist/[name].bundle.js"
   },
   watch:true,
   resolve: { extensions: [".js", ".ts"] },
@@ -15,5 +19,8 @@ module.exports = {
       template: './src/index.html',
       filename: './dist/index.html' // relative to root of the application
     })
-  ]
+  ],
+  node: {
+    fs: "empty"
+  }
 }
