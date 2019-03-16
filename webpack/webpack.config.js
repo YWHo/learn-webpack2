@@ -42,8 +42,5 @@ module.exports = {
       path: path.join(__dirname, "../dist/"),
       filename: 'settings.html' 
   })
-  ],
-  node: {
-    fs: "empty"
-  }
+  ]
 }
