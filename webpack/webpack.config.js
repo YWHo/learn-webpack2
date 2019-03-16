@@ -1,6 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const package = require('../package.json');
 const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
+const path = require("path")
 
 module.exports = {
   entry: {
@@ -9,10 +10,15 @@ module.exports = {
     settings: "./src/scripts/settings.js"
   },
   output: {
-    filename: "./dist/[name].bundle.js"
+    path: path.join(__dirname, "../dist/"),
+    filename: "[name].bundle.js"
   },
   watch:true,
   resolve: { extensions: [".js", ".ts"] },
+  devServer: {
+    contentBase: path.join(__dirname, "../dist/"),
+    port: 9000
+  },
   plugins: [
     new CommonsChunkPlugin({
       name: 'shared',
@@ -24,7 +30,8 @@ module.exports = {
       myPageHeader: 'Hello World',
       template: './src/index.html',
       chunks: ['vendor', 'shared', 'app'],
-      filename: './dist/index.html' // relative to root of the application
+      path: path.join(__dirname, "../dist/"),
+      filename: 'index.html' 
     }),
     new HtmlWebpackPlugin({
       hash: true,
@@ -32,7 +39,8 @@ module.exports = {
       myPageHeader: 'Settings',
       template: './src/index.html',
       chunks: ['vendor', 'shared', 'settings'],
-      filename: './dist/settings.html' 
+      path: path.join(__dirname, "../dist/"),
+      filename: 'settings.html' 
   })
   ],
   node: {
