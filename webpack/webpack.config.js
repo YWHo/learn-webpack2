@@ -41,6 +41,14 @@ module.exports = {
       chunks: ['vendor', 'shared', 'settings'],
       path: path.join(__dirname, "../dist/"),
       filename: 'settings.html' 
-  })
-  ]
+    })
+  ],
+  module:{
+    rules:[
+      {
+        test:/\.css$/,
+        use:['style-loader','css-loader']
+      }
+    ]
+  }
 }
