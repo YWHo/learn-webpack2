@@ -1,6 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const package = require('../package.json');
 const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const path = require("path")
 
 module.exports = {
@@ -20,6 +21,7 @@ module.exports = {
     port: 9000
   },
   plugins: [
+    new ExtractTextPlugin({filename:'app.bundle.css'}),
     new CommonsChunkPlugin({
       name: 'shared',
       minChunks: 2
@@ -47,7 +49,10 @@ module.exports = {
     rules:[
       {
         test:/\.(s*)css$/,
-        use:['style-loader','css-loader', 'sass-loader']
+        use: ExtractTextPlugin.extract({
+          fallback:'style-loader',
+          use:['css-loader','sass-loader'],
+        })
       }
     ]
   }
