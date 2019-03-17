@@ -2,6 +2,7 @@ import * as helperModule from './my-helper-module'
 import * as _ from 'lodash';
 import './sharedModule';
 import './../styles/app.css';
+import './../styles/appStyles.scss';
 
 console.log("Welcome! Greetings from app.js. Let's learn Webpack2");
 
